@@ -19,7 +19,6 @@ class Usuario(Base):
     email = Column(String(100), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
     
-
 def hash_password(password):
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
@@ -44,15 +43,12 @@ def cria_usuario(session, nome, email, senha):
 
     print("Usuário criado com sucesso!")
 
-
 def buscar_usuario(session, usuario_id):
     usuario = session.query(Usuario).filter_by(id=usuario_id).first()
     return usuario
 
-cria_usuario(session, "Luan Araujo", "joseluan74@gmail.com", "12345Aa@")
+cria_usuario(session, "Luan Araujo", "joseluan74@gmail.com", "tutorial")
 user = buscar_usuario(session, 2)
 print(f"# {user.id} - Nome: {user.name} - Email: {user.email}")
-
-
 
 session.close()
